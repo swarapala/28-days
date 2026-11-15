@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>28 Days</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header id="hud" class="hidden">
+    <div id="hud-day"></div>
+    <div id="hud-wheel"></div>
+    <div id="hud-stats"></div>
+  </header>
+
+  <main id="stage"></main>
+
+  <footer id="disclaimer">This game isn't medical advice. Talk to a doctor or school nurse about your own body.</footer>
+
+  <!-- Order matters: data + mini-games first, engine last. No modules, no build step. -->
+  <script src="data.js"></script>
+  <script src="packing.js"></script>
+  <script src="tracker.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
