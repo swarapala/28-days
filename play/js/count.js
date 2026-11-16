@@ -3,7 +3,7 @@
 // "started playing" and "finished the game".
 // To turn it on, put your GoatCounter site code between the quotes below. Empty = counting is off.
 (function () {
-  const CODE = "";
+  const CODE = "swarapala";
   const EDITION = "Game";
   window.countEvent = function () {};
   if (/[?&]demo\b/.test(location.search) || window.top !== window) return;   // the self-playing preview is not a visit

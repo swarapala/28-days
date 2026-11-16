@@ -90,7 +90,7 @@
   <ul>
     <li><strong>Family notification.</strong> Many districts require notice to families, or an opt-out, for puberty education. Follow your district's policy.</li>
     <li><strong>What you need.</strong> A computer with a keyboard and a web browser for each student or pair. It does not work on phones or tablets without a keyboard. Nothing to install, and no accounts.</li>
-    <li><strong>Privacy.</strong> The game collects nothing: no names, no logins, no analytics. Progress is saved only in the browser on that computer. Everything the game needs, including its font, is in its own folder, so it works on restricted school networks and offline.</li>
+    <li><strong>Privacy.</strong> No names, no logins, no cookies, and no personal information. Progress is saved only in the browser on that computer. The site counts visits anonymously with GoatCounter, a privacy-focused counter, so its author can see how many times it has been used. If your network blocks that, the game works the same. Everything else, including the font, is in the game's own folder.</li>
     <li><strong>Sound.</strong> It starts with sound off. Pressing M turns the beeps on.</li>
     <li><strong>Shared computers.</strong> "Continue" on the title screen picks up whatever game was last saved in that browser. Students can use "Start the story" or "Choose a day" to begin fresh.</li>
     <li><strong>Simplifications.</strong> The game uses a 28-day cycle with four tidy phases. Real cycles vary, and for teens anything from 21 to 45 days is normal. The numbers inside the game, like how fast a pad fills, were invented for gameplay.</li>
@@ -229,7 +229,7 @@
     return `<div class="phase"><svg viewBox="0 0 100 100">${s}</svg><div>${Object.values(PH).map(([n, c, a, z]) => `<div><span style="display:inline-block;width:12px;height:12px;background:${c};margin-right:8px"></span><strong>${n}</strong> day${a === z ? " " + a : "s " + a + " to " + z}</div>`).join("")}</div></div>`;
   };
 </script>
-<script src="js/count.js"></script>
+<script src="js/count.js?v=2"></script>
 <script src="js/story.js?v=s4"></script>
 <script>
   const esc = (t) => String(t).replace(/\*\*/g, "");
