@@ -676,6 +676,7 @@
   // ---------- day flow ----------
   async function startChapter(i) {
     G.ci = i; C = CHAPTERS[i];
+    if (!RT.counted) { RT.counted = true; if (window.countEvent) countEvent("started playing"); }
     G.facts = G.facts || {}; G.quiz = G.quiz || { right: 0, total: 0 }; RT.facts = []; dismissFact();
     G.day = C.day; G.cycleStarted = i > 0 ? true : !!G.flags.started;
     G.time = C.startTime; G.d = {}; G.overflow = 0; G.objective = ""; G.target = null;
@@ -1125,6 +1126,7 @@
   // ---------- ending ----------
   async function ending() {
     RT.mode = "end";
+    if (window.countEvent) countEvent("finished the game");
     $("hud").classList.add("hidden");
     const st = G.stats, avg = (st.health + st.energy + st.mood + (100 - st.cravings)) / 4;
     const acc = G.log.filter((l) => l.correct).length;

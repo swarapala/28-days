@@ -1,3 +1,10 @@
+/* The font ships with the game (fonts/Jersey15.woff2), so nothing is loaded from other websites. */
+@font-face {
+  font-family: "Jersey 15";
+  src: url("fonts/Jersey15.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: block;
+}
+
 /* All sizes are in game pixels: calc(var(--u) * N). The game is 320x192, scaled up by --s. */
 :root {
   --s: 3;
