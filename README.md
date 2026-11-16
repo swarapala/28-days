@@ -10,10 +10,10 @@ You play Ruby. Pack your bag at home, go to health class at school, buy supplies
 
 ## Classroom Edition
 
-A separate version for middle school health classes, with a teacher guide, answer key and student worksheet.
+A separate version for middle school health classes, with a teacher guide, answer key and student worksheet. It has its own repository: https://github.com/swarapala/28-days-classroom
 
-- Play: https://swarapala.github.io/28-days/school/
-- Teacher guide: https://swarapala.github.io/28-days/school/teacher-guide.html
+- Play: https://swarapala.github.io/28-days-classroom/
+- Teacher guide: https://swarapala.github.io/28-days-classroom/teacher-guide.html
 
 ## Controls
 
