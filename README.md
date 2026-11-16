@@ -2,7 +2,9 @@
 
 A top-down pixel RPG about a first period and the month that follows.
 
-**Play it:** https://swarapala.github.io/28-days/
+**Website:** https://swarapala.github.io/28-days/
+
+**Play it:** https://swarapala.github.io/28-days/play/
 
 You play Ruby. Pack your bag at home, go to health class at school, buy supplies at Corner Mart, and get through all four phases of the cycle. Leaks, cramps, cravings and mood swings included.
 
@@ -32,11 +34,11 @@ Plain HTML, CSS and JavaScript on one canvas. No game engine, no build step and 
 
 | File | What it does |
 |---|---|
-| `js/art.js` | Draws all the pixel art |
-| `js/world.js` | Maps, items and characters |
-| `js/engine.js` | Movement, the clock, the body simulation, menus, saving |
-| `js/story.js` | Dialogue, facts, health lessons and quizzes |
-| `js/demo.js` | A self-playing tour, at `?demo` |
+| `play/js/art.js` | Draws all the pixel art |
+| `play/js/world.js` | Maps, items and characters |
+| `play/js/engine.js` | Movement, the clock, the body simulation, menus, saving |
+| `play/js/story.js` | Dialogue, facts, health lessons and quizzes |
+| `play/js/demo.js` | A self-playing tour, at `play/?demo` |
 
 `v1-cards/` is the first version of the game, before it was rebuilt as an RPG.
 

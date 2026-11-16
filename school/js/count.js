@@ -6,6 +6,7 @@
   const CODE = "";
   const EDITION = "Classroom";
   window.countEvent = function () {};
+  if (/[?&]demo\b/.test(location.search) || window.top !== window) return;   // the self-playing preview is not a visit
   if (!CODE || location.protocol === "file:" || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return;
   const s = document.createElement("script");
   s.async = true;

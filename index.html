@@ -3,49 +3,159 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>28 Days</title>
-  <link rel="preload" href="fonts/Jersey15.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="style.css?v=20" />
+  <title>28 Days: a game about the menstrual cycle</title>
+  <meta name="description" content="28 Days is a free pixel-art game where you play through a first period and the month after it. Includes a Classroom Edition with a teacher guide." />
+  <link rel="preload" href="play/fonts/Jersey15.woff2" as="font" type="font/woff2" crossorigin />
+  <style>
+    @font-face { font-family: "Jersey 15"; src: url("play/fonts/Jersey15.woff2") format("woff2"); font-display: swap; }
+    :root { --ink: #1d1828; --ink2: #2e2740; --panel: #251f33; --cream: #f3e9d2; --dim: #b3acc2; --hl: #f2c14e; --rose: #e36b7b; --line: #4a4064; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--ink); color: var(--cream); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    a { color: var(--hl); }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+    h1, h2, h3, .btn, .kicker, nav a { font-family: "Jersey 15", "Courier New", monospace; font-weight: 400; letter-spacing: 0.03em; }
+
+    nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; flex-wrap: wrap; }
+    nav .brand { font-family: "Jersey 15", monospace; font-size: 1.7rem; color: var(--cream); text-decoration: none; }
+    nav .brand span, h1 span { color: var(--rose); }
+    nav .links { display: flex; gap: 18px; flex-wrap: wrap; }
+    nav .links a { color: var(--cream); text-decoration: none; font-size: 1.25rem; }
+    nav .links a:hover { color: var(--hl); }
+
+    header { padding: 28px 0 44px; text-align: center; }
+    h1 { font-size: clamp(3.2rem, 11vw, 6.4rem); line-height: 1; margin: 0; text-shadow: 0 4px 0 #0f0c16, 4px 8px 0 #3a3150; }
+    .tagline { font-size: clamp(1.1rem, 2.6vw, 1.4rem); max-width: 640px; margin: 18px auto 26px; color: var(--cream); }
+    .buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-block; font-size: 1.6rem; padding: 8px 26px 10px; border-radius: 8px; text-decoration: none; color: var(--ink); background: var(--hl); box-shadow: 0 0 0 3px var(--ink), 0 0 0 5px var(--hl), 0 9px 0 rgba(0,0,0,.35); }
+    .btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn.alt { background: var(--panel); color: var(--cream); box-shadow: 0 0 0 3px var(--ink), 0 0 0 5px var(--cream), 0 9px 0 rgba(0,0,0,.35); }
+    .note { color: var(--dim); font-size: 0.92rem; margin-top: 16px; }
+
+    .preview { margin: 36px auto 0; max-width: 860px; border-radius: 10px; overflow: hidden; background: #0f0c16; box-shadow: 0 0 0 3px var(--cream), 0 0 0 6px var(--ink), 0 18px 40px rgba(0,0,0,.5); }
+    .preview .frame { position: relative; aspect-ratio: 5 / 3; }
+    .preview iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+    .preview .cap { font-size: 0.9rem; color: var(--dim); padding: 8px 12px; text-align: center; border-top: 1px solid var(--line); }
+
+    section { padding: 56px 0; border-top: 1px solid var(--line); }
+    .kicker { color: var(--hl); font-size: 1.2rem; letter-spacing: 0.14em; margin: 0 0 4px; }
+    h2 { font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.1; margin: 0 0 14px; }
+    h3 { font-size: 1.55rem; margin: 0 0 4px; color: var(--hl); }
+    p { margin: 10px 0; }
+    .lead { max-width: 720px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-top: 22px; }
+    .card { background: var(--panel); border: 2px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+    .card p { margin: 4px 0 0; color: #ddd5e8; font-size: 0.97rem; }
+    .two { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; align-items: start; }
+    @media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+    ul.check { list-style: none; padding: 0; margin: 12px 0; }
+    ul.check li { padding-left: 26px; position: relative; margin: 7px 0; }
+    ul.check li::before { content: ""; position: absolute; left: 2px; top: 0.55em; width: 10px; height: 10px; background: var(--hl); box-shadow: 0 0 0 2px var(--ink), 0 0 0 4px var(--hl); }
+    .phases { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .phases span { font-family: "Jersey 15", monospace; font-size: 1.2rem; padding: 2px 12px 4px; border-radius: 6px; color: #1d1828; }
+    .box { background: var(--panel); border-left: 5px solid var(--hl); padding: 14px 18px; border-radius: 0 10px 10px 0; margin-top: 18px; }
+    footer { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--dim); font-size: 0.92rem; }
+    footer a { color: var(--dim); }
+  </style>
 </head>
 <body>
-  <div id="game">
-    <canvas id="view" width="320" height="192"></canvas>
-    <div id="ui">
-      <div id="labels"></div>
-      <div id="floats"></div>
-      <div id="hud" class="hidden">
-        <div id="stats" class="panel"></div>
-        <div id="objective"></div>
-        <div id="clock" class="panel"></div>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top"><span>28</span> DAYS</a>
+      <div class="links">
+        <a href="#game">The game</a><a href="#teachers">For teachers</a><a href="#facts">The facts</a><a href="#about">About</a>
       </div>
-      <div id="fact" class="panel hidden">
-        <img class="ic" id="fact-icon" alt="" />
-        <div class="fbody"><div class="fhead">DID YOU KNOW?</div><div id="fact-text"></div></div>
-        <div class="fkey">F</div>
+    </nav>
+
+    <header id="top">
+      <h1><span>28</span> DAYS</h1>
+      <p class="tagline">A free game about a first period and the month that follows. Pack your bag, go to health class, handle the leaks, and learn how the menstrual cycle works by living through one.</p>
+      <div class="buttons">
+        <a class="btn" href="play/">Play the game</a>
+        <a class="btn alt" href="school/">Classroom Edition</a>
       </div>
-      <div id="toasts"></div>
-      <div id="banner"></div>
-      <div id="dialog" class="hidden">
-        <div class="portrait"><img id="dlg-portrait" alt="" /></div>
-        <div class="box panel">
-          <div id="dlg-name"></div>
-          <div id="dlg-text"></div>
-          <div id="dlg-next">▼</div>
+      <p class="note">Runs in your browser. Nothing to install, no account. You need a keyboard.</p>
+
+      <div class="preview">
+        <div class="frame"><iframe id="demo" title="A self-playing preview of the game" loading="lazy" src="play/index.html?demo&auto"></iframe></div>
+        <div class="cap">A self-playing preview. Press "Play the game" to play it yourself.</div>
+      </div>
+    </header>
+
+    <section id="game">
+      <p class="kicker">THE GAME</p>
+      <h2>You play Ruby. Her first period starts in the middle of health class.</h2>
+      <p class="lead">From there you guide her through one full cycle. A simulation tracks her flow, cramps, energy, mood and cravings. Forget to pack a pad and she leaks. Pack well and the day goes smoothly.</p>
+      <div class="grid">
+        <div class="card"><h3>Home: pack</h3><p>Your bag holds only six things. Pads, a snack, spare pants, a swimsuit: you choose each morning.</p></div>
+        <div class="card"><h3>School: learn</h3><p>Health class with Dr. Flo. A short lesson and a pop quiz every school day, and a unit test at the end.</p></div>
+        <div class="card"><h3>Corner Mart: buy</h3><p>Buy your own supplies on a budget, and find out what each product is for.</p></div>
+        <div class="card"><h3>Every night: track</h3><p>Log flow, cramps and mood in a cycle tracker. The better you track, the better you can plan.</p></div>
+      </div>
+      <h3 style="margin-top:30px">All four phases of the cycle</h3>
+      <p class="lead">The game covers the whole month, including the weeks without a period. Four hormones show up as characters to explain what is happening inside.</p>
+      <div class="phases">
+        <span style="background:#d9505f">Menstrual</span><span style="background:#e9a04f">Follicular</span><span style="background:#4fae84">Ovulation</span><span style="background:#7b7fd4">Luteal</span>
+      </div>
+    </section>
+
+    <section id="teachers">
+      <p class="kicker">FOR TEACHERS</p>
+      <h2>A Classroom Edition for middle school health classes</h2>
+      <div class="two">
+        <div>
+          <p>The Classroom Edition is a separate version of the game made for school use. It is written for the whole class: three boys in the story ask questions and learn alongside Ruby.</p>
+          <ul class="check">
+            <li>Start on any day, so one day fits in one class period</li>
+            <li>A printable teacher guide with pacing plans and discussion questions</li>
+            <li>An answer key for all 23 quiz questions</li>
+            <li>A one-page student worksheet</li>
+            <li>A glossary with a labeled body diagram</li>
+            <li>Sound starts off</li>
+          </ul>
+          <div class="buttons" style="justify-content:flex-start;margin-top:20px">
+            <a class="btn" href="school/teacher-guide.html">Teacher guide</a>
+            <a class="btn alt" href="school/">Open the Classroom Edition</a>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <h3>What it covers</h3>
+            <p>The biology of the menstrual cycle, period products and hygiene, cramps, PMS, mood changes, cycle tracking, and when to see a doctor.</p>
+            <h3 style="margin-top:14px">What it doesn't</h3>
+            <p>Sexual activity, contraception, or pregnancy. Pregnancy is mentioned only to explain why the lining of the uterus builds up each cycle.</p>
+          </div>
+          <div class="box">Please have a school nurse or health teacher review it before using it with students. It has not yet been reviewed by a medical professional.</div>
         </div>
       </div>
-      <div id="choices" class="panel hidden"></div>
-      <div id="modal" class="hidden"></div>
-      <div id="fade"></div>
-      <div id="screen" class="hidden"></div>
-    </div>
+    </section>
+
+    <section id="facts">
+      <p class="kicker">THE FACTS</p>
+      <h2>Every fact shows where it came from</h2>
+      <p class="lead">The game has 31 "Did you know?" facts, five health lessons and a glossary. Each one was checked against pages from the CDC, the American College of Obstetricians and Gynecologists (ACOG), the NIH and a few others. Where sources disagree, the game uses ACOG's number.</p>
+      <p class="lead">The full list of claims, sources and corrections is public: <a href="https://github.com/swarapala/28-days/blob/main/SOURCES.md">read the fact check</a>.</p>
+      <p class="lead">28 Days is not medical advice. If you have questions about your own body, talk to a parent or guardian, a school nurse, or a doctor.</p>
+    </section>
+
+    <section id="about">
+      <p class="kicker">ABOUT</p>
+      <h2>Made by a student</h2>
+      <p class="lead">28 Days was created by Swara Palanivel and first presented at High School I/O 2026, a student hackathon. It is built in plain HTML, CSS and JavaScript, with no game engine and no image files: every tile and character is pixel art drawn by code. It was built with Claude Code, an AI coding assistant.</p>
+      <p class="lead">Questions, feedback, or using it in your class? Email <a href="mailto:swarapala@gmail.com">swarapala@gmail.com</a>.</p>
+      <p class="lead">The code is open: <a href="https://github.com/swarapala/28-days">github.com/swarapala/28-days</a>.</p>
+    </section>
+
+    <footer>
+      <p>28 Days is free to play and free to use in classrooms. It is not medical advice.</p>
+      <p><a href="play/">Play</a> · <a href="school/">Classroom Edition</a> · <a href="school/teacher-guide.html">Teacher guide</a> · <a href="https://github.com/swarapala/28-days/blob/main/SOURCES.md">Sources</a></p>
+    </footer>
   </div>
 
-  <!-- Plain scripts, no build step: double-click index.html to play. -->
-  <script src="js/count.js"></script>
-  <script src="js/art.js?v=20"></script>
-  <script src="js/world.js?v=20"></script>
-  <script src="js/engine.js?v=20"></script>
-  <script src="js/story.js?v=20"></script>
-  <script src="js/demo.js?v=20"></script>
+  <script src="play/js/count.js"></script>
+  <script>
+    // The preview is the game's own self-playing tour. Restart it when it finishes (about 2 min 45 s).
+    setInterval(function () { var f = document.getElementById("demo"); if (f) f.src = f.src; }, 172000);
+  </script>
 </body>
 </html>
