@@ -6,6 +6,13 @@ A top-down pixel RPG about a first period and the month that follows.
 
 You play Ruby. Pack your bag at home, go to health class at school, buy supplies at Corner Mart, and get through all four phases of the cycle. Leaks, cramps, cravings and mood swings included.
 
+## Classroom Edition
+
+A separate version for middle school health classes, with a teacher guide, answer key and student worksheet.
+
+- Play: https://swarapala.github.io/28-days/school/
+- Teacher guide: https://swarapala.github.io/28-days/school/teacher-guide.html
+
 ## Controls
 
 | Key | What it does |
